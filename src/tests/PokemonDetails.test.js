@@ -3,7 +3,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
-import pokemons from '../data';
 
 describe(`Teste se as informações detalhadas do pokémon
         selecionado são mostradas na tela:`, () => {
