@@ -22,31 +22,24 @@ quando o botão Próximo pokémon é clicado:`, () => {
   });
   it(`Os próximos pokémons da lista devem ser mostrados, 
     um a um, ao clicar sucessivamente no botão;`, () => {
-    const lastPokemon = -1;
     renderWithRouter(<App />);
     expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
     const nextPokemon = screen.getByRole('button', { name: /próximo pokémon/i });
     pokemons.forEach(({ name }) => {
       expect(screen.getByText(name)).toBeInTheDocument();
       userEvent.click(nextPokemon);
-      if (name === pokemons.at(lastPokemon)) {
-        userEvent.click(nextPokemon);
-        expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
-      }
     });
   });
   it(`O primeiro pokémon da lista deve ser mostrado ao clicar no botão,
     se estiver no último pokémon da lista.`, () => {
-    const lastPokemon = -1;
     renderWithRouter(<App />);
     expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
     const nextPokemon = screen.getByRole('button', { name: /próximo pokémon/i });
     pokemons.forEach(({ name }) => {
-      if (name === pokemons.at(lastPokemon)) {
-        userEvent.click(nextPokemon);
-        expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
-      }
+      expect(screen.getByText(name)).toBeInTheDocument();
+      userEvent.click(nextPokemon);
     });
+    expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
   });
 });
 
